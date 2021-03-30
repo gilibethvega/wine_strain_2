@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  editor: false
+  writer: false
+  reviewer: false
+
+two:
+  editor: false
+  writer: false
+  reviewer: false
