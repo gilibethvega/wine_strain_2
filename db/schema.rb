@@ -35,4 +35,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_132959) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "wine_strains", "strains"
+  add_foreign_key "wine_strains", "wines"
+
 end
