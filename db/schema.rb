@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_164915) do
+ActiveRecord::Schema.define(version: 2021_03_31_152717) do
+
+  create_table "magazine_oenologists", force: :cascade do |t|
+    t.integer "magazine_id"
+    t.integer "oenologist_id"
+    t.index ["magazine_id"], name: "index_magazine_oenologists_on_magazine_id"
+    t.index ["oenologist_id"], name: "index_magazine_oenologists_on_oenologist_id"
+  end
+
+  create_table "magazines", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "oenologists", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.string "nationality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.boolean "editor", default: false
+    t.boolean "writer", default: false
+    t.boolean "reviewer", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "strains", force: :cascade do |t|
     t.string "name"
@@ -29,6 +58,14 @@ ActiveRecord::Schema.define(version: 2021_03_30_164915) do
     t.boolean "editor"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "wine_oenologists", force: :cascade do |t|
+    t.integer "grade"
+    t.integer "wine_id"
+    t.integer "oenologist_id"
+    t.index ["oenologist_id"], name: "index_wine_oenologists_on_oenologist_id"
+    t.index ["wine_id"], name: "index_wine_oenologists_on_wine_id"
   end
 
   create_table "wine_strains", force: :cascade do |t|
