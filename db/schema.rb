@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_152717) do
+ActiveRecord::Schema.define(version: 2021_04_01_140221) do
 
   create_table "magazine_oenologists", force: :cascade do |t|
-    t.integer "magazine_id"
     t.integer "oenologist_id"
+    t.integer "magazine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["magazine_id"], name: "index_magazine_oenologists_on_magazine_id"
     t.index ["oenologist_id"], name: "index_magazine_oenologists_on_oenologist_id"
   end
@@ -23,6 +25,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_152717) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "oenologist_id"
+    t.index ["oenologist_id"], name: "index_magazines_on_oenologist_id"
   end
 
   create_table "oenologists", force: :cascade do |t|
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_152717) do
     t.boolean "reviewer", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "magazine_id"
+    t.index ["magazine_id"], name: "index_roles_on_magazine_id"
   end
 
   create_table "strains", force: :cascade do |t|
@@ -61,9 +67,10 @@ ActiveRecord::Schema.define(version: 2021_03_31_152717) do
   end
 
   create_table "wine_oenologists", force: :cascade do |t|
-    t.integer "grade"
-    t.integer "wine_id"
     t.integer "oenologist_id"
+    t.integer "wine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["oenologist_id"], name: "index_wine_oenologists_on_oenologist_id"
     t.index ["wine_id"], name: "index_wine_oenologists_on_wine_id"
   end
@@ -83,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_152717) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "grade"
   end
 
 end

@@ -1,4 +1,6 @@
 class MagazinesController < ApplicationController
+  before_action :authorize_editor!
+  before_action :authenticate_user!
   before_action :set_magazine, only: %i[ show edit update destroy ]
 
   # GET /magazines or /magazines.json
@@ -57,10 +59,7 @@ class MagazinesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_magazine
-      @magazine = Magazine.find(params[:id])
-    end
+
 
     # Only allow a list of trusted parameters through.
     def magazine_params

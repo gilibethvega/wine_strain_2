@@ -30,6 +30,20 @@
     </div>
   </div>
 
+  <div class="field">
+    <%= form.label :grade %> 
+    <%= form.number_field :grade, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= form.label :oenologists %>
+      <%= form.collection_check_boxes(:oenologist_ids, Oenologist.all, :id, :name) do |b| %>
+        <%= b.label class:"label-checkbox" do%>
+          <%= b.check_box + b.text %>
+        <% end %>
+      <% end %>
+  </div>
+
   <br>
 
   <div class="actions">
@@ -37,4 +51,5 @@
   </div>
 
   <%= link_to 'New Strain', new_strain_path %>
+  
 <% end %>

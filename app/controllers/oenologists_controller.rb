@@ -1,6 +1,7 @@
 class OenologistsController < ApplicationController
+  before_action :authorize_editor!
+  before_action :authenticate_user!
   before_action :set_oenologist, only: %i[ show edit update destroy ]
-
   # GET /oenologists or /oenologists.json
   def index
     @oenologists = Oenologist.all
@@ -8,11 +9,13 @@ class OenologistsController < ApplicationController
 
   # GET /oenologists/1 or /oenologists/1.json
   def show
+    @oenologists = Oenologist.all
   end
 
   # GET /oenologists/new
   def new
     @oenologist = Oenologist.new
+    @magazines= Magazine.all
   end
 
   # GET /oenologists/1/edit
@@ -22,7 +25,7 @@ class OenologistsController < ApplicationController
   # POST /oenologists or /oenologists.json
   def create
     @oenologist = Oenologist.new(oenologist_params)
-
+    
     respond_to do |format|
       if @oenologist.save
         format.html { redirect_to @oenologist, notice: "Oenologist was successfully created." }
@@ -64,6 +67,6 @@ class OenologistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def oenologist_params
-      params.require(:oenologist).permit(:name, :age, :nationality)
+      params.require(:oenologist).permit(:name, :age, :nationality, {magazine_ids: []})
     end
 end
