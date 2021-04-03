@@ -1,21 +1,13 @@
 require 'rails_helper'
-require 'spec_helper'
 
-RSpec.describe Strain, type: :model do
-  it { should validate_uniqueness_of(:name) }
-end
-
-RSpec.describe Strain, type: :model do
-  it "should not be blank or nil" do
-
-    strain = Strain.create(name: ' ')
-    expect(strain).to_not be_valid
-
-    strain = Strain.create(name: nil)
-    expect(strain).to_not be_valid
-    
-    strain = Strain.create(name: 'Carmenere')
-    expect(strain).to be_valid
+RSpec.describe Strain, :type => :model do
+  it 'strains cant have the same name' do
+      Strain.create(name: 'Carmenere')
+      expect(Strain.new(name: 'Carmenere')).to_not be_valid
+  end
+  it 'strain name cant be blank' do
+      expect(Strain.new(name: '')).to_not be_valid
+      expect(Strain.new(name: 'Carmenere')).to be_valid
+      expect(Strain.new(name: nil)).to_not be_valid
   end
 end
-

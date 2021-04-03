@@ -4,30 +4,27 @@ require 'spec_helper'
 require 'rails_helper'
 require 'spec_helper'
 
-RSpec.describe "Wines", type: :request do
-  
-  describe "GET #index" do
-    subject { get :index }
+RSpec.describe WinesController, :type => :controller do
+  describe 'GET wines#index' do
+    it 'should render wines#index template' do
+        @user = User.create(email: 'desafiolatam@desafiolatam.com', password: 'desafiolatam', password_confirmation: 'desafiolatam')
 
-    it 'index shows wines' do
-      get :index
-      expect(subject).to be_successful
+        sign_in @user
+        
+        get :index
+        expect(response).to render_template("index")
     end
-    
-    it "renders the index template" do
-      get :index
-      expect(subject).to render_template("wines/index")
-    end
-
   end
 
-  describe "GET #show" do
-
-    it "renders the show template" do
-      get :show
-      expect(subject).to render_template("wines/show")
+  describe 'You can"t view index without login ' do
+    it 'should redirect to sign_in view' do
+        get :index
+        expect(response).to_not render_template("index")
     end
 
+    it 'should redirect to sign_in view' do
+        get :index
+        expect(response).to redirect_to new_user_session_path
+    end
   end
-
 end
