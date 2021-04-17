@@ -43,8 +43,6 @@ ActiveRecord::Schema.define(version: 2021_04_01_140221) do
     t.boolean "reviewer", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "magazine_id"
-    t.index ["magazine_id"], name: "index_roles_on_magazine_id"
   end
 
   create_table "strains", force: :cascade do |t|
@@ -61,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_140221) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "editor"
+    t.boolean "editor", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
